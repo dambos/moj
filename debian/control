@@ -1,0 +1,17 @@
+Source: pixiewps
+Section: net
+Priority: extra
+Maintainer: Mati Aharoni <muts@kali.org>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: https://github.com/wiire/pixiewps
+Vcs-Git: git://git.kali.org/packages/pixiewps.git
+Vcs-Browser: http://git.kali.org/gitweb/?p=packages/pixiewps.git;a=summary
+
+
+Package: pixiewps
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Pixiewps is an offline the WPS bruteforce tool.
+ Pixiewps is a tool written in C used to bruteforce offline the WPS pin exploiting the low or non-existing entropy of some APs (pixie dust attack). It is meant for educational purposes only. All credits for the research go to Dominique Bongard.
+
