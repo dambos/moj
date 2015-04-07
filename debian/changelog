@@ -1,5 +1,12 @@
-pixiewps (1.0-1kali) kali; urgency=low
+pixiewps (1.0-0kali1) kali; urgency=low
 
+  [ Mati Aharoni ]
   * Initial release 
+
+  [ Sophie Brun ]
+  * debian/control: build-depends updated. debhelper version bumped to 9,
+    add libssl-dev
+  * Add a patch to fix the path in Makefile
+  * Add a patch to add missing LDFLAGS, CFLAGS and CPPFLAGS in Makefile
 
  -- Mati Aharoni <muts@kali.org>  Tue, 07 Apr 2015 05:35:25 -0400
