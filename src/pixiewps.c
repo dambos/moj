@@ -4,8 +4,8 @@
  *
  * Special thanks to: datahead, soxrok2212
  *
- * Copyright (c) 2015 wiire <wi7ire@gmail.com>
- * Version: 1.0
+ * Copyright (c) 2015, wiire <wi7ire@gmail.com>
+ * Version: 1.0.5
  *
  * DISCLAIMER: This tool was made for educational purposes only.
  *             The author is NOT responsible for any misuse or abuse.
@@ -22,6 +22,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * In addition, as a special exception, the copyright holders give
+ * permission to link the code of portions of this program with the
+ * OpenSSL library under certain conditions as described in each
+ * individual source file, and distribute linked combinations
+ * including the two.
+ * You must obey the GNU General Public License in all respects
+ * for all of the code used other than OpenSSL.  If you modify
+ * file(s) with this exception, you may extend this exception to your
+ * version of the file(s), but you are not obligated to do so.  If you
+ * do not wish to do so, delete this exception statement from your
+ * version.  If you delete this exception statement from all source
+ * files in the program, then also delete it here.
  */
 
 #include <stdio.h>
@@ -201,13 +214,18 @@ int main(int argc, char **argv) {
 
 	gettimeofday(&t0, 0);
 
-	while (mode < 3 && !found) {
+	while (mode < 4 && !found) {
 
 		first_half = 0;
 		second_half = 0;
 
-		/* PRNG bruteforce */
 		if (mode == 2 && e_nonce) {
+			memcpy(e_s1, e_nonce, NONCE_LEN);
+			memcpy(e_s2, e_nonce, NONCE_LEN);
+		}
+
+		/* PRNG bruteforce */
+		if (mode == 3 && e_nonce) {
 
 			/* Reducing entropy from 32 to 25 bits */
 			unsigned int index = e_nonce[0] << 25;
@@ -242,7 +260,7 @@ int main(int argc, char **argv) {
 		}
 
 		/* WPS pin cracking */
-		if (mode == 1 || (mode == 2 && print_seed)) {
+		if (mode == 1 || (mode == 2 && e_nonce) || (mode == 3 && print_seed)) {
 			while (first_half < 10000) {
 				uint_to_char_array(first_half, 4, s_pin);
 				hmac_sha256(authkey, AUTHKEY_LEN, (unsigned char *) s_pin, 4, psk1);
@@ -323,7 +341,7 @@ int main(int argc, char **argv) {
 	mode--;
 
 	if (found) {
-		if (e_nonce && mode == 2) {
+		if (e_nonce && mode == 3) {
 			printf("\n [*] PRNG Seed: %u", print_seed);
 		}
 		printf("\n [*] ES-1: ");
