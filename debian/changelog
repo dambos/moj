@@ -1,3 +1,9 @@
+pixiewps (1.0.5-0kali1) kali; urgency=low
+
+  * Upstream update
+
+ -- Mati Aharoni <muts@kali.org>  Sat, 11 Apr 2015 04:07:12 -0400
+
 pixiewps (1.0-0kali1) kali; urgency=low
 
   [ Mati Aharoni ]
