@@ -1,0 +1,18 @@
+Index: pixiewps/src/Makefile
+===================================================================
+--- pixiewps.orig/src/Makefile	2015-05-02 02:37:41.815170861 -0400
++++ pixiewps/src/Makefile	2015-05-02 02:40:37.451176095 -0400
+@@ -3,11 +3,11 @@
+ LDFLAGS = -lssl -lcrypto
+ 
+ TARGET = pixiewps
+-PREFIX = $(DESTDIR)/usr/local
++PREFIX = $(DESTDIR)/usr
+ BINDIR = $(PREFIX)/bin
+ 
+ all:
+-	$(CC) $(CCFLAGS) -o $(TARGET) $(TARGET).c random_r.c $(LDFLAGS)
++	$(CC) $(CCFLAGS) -o $(TARGET) $(TARGET).c random_r.c $(LDFLAGS) $(CFLAGS) $(CPPFLAGS)
+ 
+ install:
+ 	install -D pixiewps $(BINDIR)/$(TARGET)
